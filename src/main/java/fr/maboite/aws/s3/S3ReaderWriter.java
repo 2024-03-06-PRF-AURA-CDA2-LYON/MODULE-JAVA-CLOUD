@@ -62,7 +62,11 @@ public class S3ReaderWriter {
 			metadata.put("author", "Jean Dupont");
 			metadata.put("version", "1.0.0");
 
-			PutObjectRequest putOb = PutObjectRequest.builder().bucket(bucketName).key(objectKey).metadata(metadata)
+			PutObjectRequest putOb = PutObjectRequest
+					.builder()
+					.bucket(bucketName)
+					.key(objectKey)
+					.metadata(metadata)
 					.build();
 
 			s3.putObject(putOb, RequestBody.fromFile(new File(objectPath)));
@@ -84,10 +88,14 @@ public class S3ReaderWriter {
 			ListBucketsResponse response = s3.listBuckets();
 			List<Bucket> bucketList = response.buckets();
 			System.out.println("Affichage des compartiments accessibles");
-			bucketList.forEach(bucket -> {
+			for(Bucket bucket : bucketList) {
 				System.out.println("Compartiment : " + bucket.name());
-			});
-
+			}
+			//Le code ci-dessus, pourrait être transformé
+			//Dans le code ci-dessous si on veut utiliser des lambdas
+//			bucketList.forEach(bucket -> {
+//				System.out.println("Compartiment : " + bucket.name());
+//			});
 		} catch (S3Exception e) {
 			System.err.println(e.awsErrorDetails().errorMessage());
 			System.exit(ERROR_STATUS);
