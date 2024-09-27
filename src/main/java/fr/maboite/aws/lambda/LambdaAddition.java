@@ -9,7 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
  * addition.
  */
 public class LambdaAddition implements RequestHandler<IntegerRecord, Integer> {
-
+	
 	@Override
 	/**
 	 * Traite event. Affiche le message de event, et renvoie la somme de x et y de
@@ -18,6 +18,7 @@ public class LambdaAddition implements RequestHandler<IntegerRecord, Integer> {
 	public Integer handleRequest(IntegerRecord event, Context context) {
 		LambdaLogger logger = context.getLogger();
 		logger.log("Message de l'événement : " + event.message());
+		logger.log("Salut, la lambda démarre");
 		return event.x() + event.y();
 	}
 }
